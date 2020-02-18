@@ -6,9 +6,11 @@ import entities.Joke;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.validation.constraints.AssertTrue;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -100,5 +102,21 @@ public class JokeFacadeTest {
         assertEquals(expected,result);
                
     }
+    
+    @Test
+    public void testGetAllJokes(){
+        int expected = 2;
+        int result = facade.getAllJokes().size();
+        assertEquals(expected,result);
+    }
+    
+    // contains bruger .equals metoden, så nedenstående virker ikke.
+    // Går lige i tænkeboks mht. hvordan jeg tester getRandomJoke og arbejder videre med noget andet imens.
+//    @Test
+//    public void testGetRandomJoke(){
+//        JokeDTO randomJokeDTO = facade.getRandomJoke();
+//        List<JokeDTO> allJokes = facade.getAllJokes();
+//        assertTrue(allJokes.contains(randomJokeDTO));
+//    }
 
 }
