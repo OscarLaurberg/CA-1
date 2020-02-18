@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import entities.Joke;
 import utils.EMF_Creator;
-import facades.FacadeExample;
+import facades.JokeFacade;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -29,7 +29,7 @@ public class JokeResource {
     //An alternative way to get the EntityManagerFactory, whithout having to type the details all over the code
     //EMF = EMF_Creator.createEntityManagerFactory(DbSelector.DEV, Strategy.CREATE);
     
-    private static final FacadeExample FACADE =  FacadeExample.getFacadeExample(EMF);
+    private static final JokeFacade FACADE =  JokeFacade.getFacadeExample(EMF);
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
             
     @GET
@@ -41,7 +41,7 @@ public class JokeResource {
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String getRenameMeCount() {
-        long count = FACADE.getRenameMeCount();
+        long count = FACADE.getJokeCount();
         //System.out.println("--------------->"+count);
         return "{\"count\":"+count+"}";  //Done manually so no need for a DTO
     }
