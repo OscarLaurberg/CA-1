@@ -4,6 +4,7 @@ import entities.Joke;
 import utils.EMF_Creator;
 import io.restassured.RestAssured;
 import static io.restassured.RestAssured.given;
+import io.restassured.http.ContentType;
 import io.restassured.parsing.Parser;
 import java.net.URI;
 import javax.persistence.EntityManager;
@@ -117,16 +118,36 @@ public class JokesResourceTest {
     }
 
     @Test
-    public void testGetJokeById() throws Exception {
-        int id = r1.getId().intValue();
-        given().
-                contentType("application/json")
-                .get("/jokes/{id}", id)
-                .then().assertThat()
-                .statusCode(200)
-                .body("punchLine", equalTo("Joke1"), "category", equalTo("Adult"), "reference", equalTo("Unknown"));
-             
-    }
-    
-    
+    public void testGetAllJokesAsc() throws Exception {
+        if (r1.getId() < r2.getId()) {
+            given()
+                    .contentType("application/json")
+                    .get("/jokes/all").then()
+                    .assertThat()
+                    .statusCode(HttpStatus.OK_200.getStatusCode())
+                    .body("[0].punchLine", equalTo("Joke1"), "[1].punchLine", equalTo("Joke2"));
+        } else{
+            given()
+                    .contentType("application/json")
+                    .get("/jokes/all").then()
+                    .assertThat()
+                    .statusCode(HttpStatus.OK_200.getStatusCode())
+                    .body("[0].punchLine", equalTo("Joke2"), "[1].punchLine", equalTo("Joke1"));
+            
+        }
+
+        }
+
+        @Test
+        public void testGetJokeById() throws Exception {
+            int id = r1.getId().intValue();
+            given().
+                    contentType("application/json")
+                    .get("/jokes/{id}", id)
+                    .then().assertThat()
+                    .statusCode(200)
+                    .body("punchLine", equalTo("Joke1"), "category", equalTo("Adult"), "reference", equalTo("Unknown"));
+
+        }
+
     }
