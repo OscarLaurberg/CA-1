@@ -17,7 +17,7 @@ import javax.persistence.NamedQuery;
  * @author oscar
  */
 @Entity
-@NamedQuery (name = "GroupMember.deleteAllRows", query = "DELETE from Joke")
+@NamedQuery (name = "GroupMember.deleteAllRows", query = "DELETE from GroupMember")
 public class GroupMember implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -26,6 +26,15 @@ public class GroupMember implements Serializable {
     private Long id;
     private String name;
     private String color;
+    private String studentId;
+
+    public String getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
+    }
 
     public GroupMember() {
         
@@ -39,9 +48,10 @@ public class GroupMember implements Serializable {
         this.id = id;
     }
 
-    public GroupMember(String name, String color){
+    public GroupMember(String name, String color, String studentId){
         this.name=name;
         this.color=color;
+        this.studentId=studentId;
     }
 
     public String getName() {

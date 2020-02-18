@@ -79,7 +79,6 @@ public class JokeFacade {
             addJoke(joke.getPunchLine(), joke.getCategory(), joke.getCategory(), joke.getAgeRestriction());
         }
     }
-    // Mangler test på at jeg får ID's ud asc
     public List<JokeDTO> getAllJokes() {
         EntityManager em = getEntityManager();
         TypedQuery q = em.createQuery("SELECT j FROM Joke j order by j.id asc", Joke.class);

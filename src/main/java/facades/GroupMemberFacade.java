@@ -39,8 +39,8 @@ public class GroupMemberFacade {
         }
     }
 
-    public GroupMember addGroupMember(String name, String color) {
-        GroupMember gm = new GroupMember(name, color);
+    public GroupMember addGroupMember(String name, String color, String studentId) {
+        GroupMember gm = new GroupMember(name, color,studentId);
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
@@ -55,7 +55,7 @@ public class GroupMemberFacade {
 
     public void addGroupMembers(List<GroupMember> groupMembers) {
         for (GroupMember groupMember : groupMembers) {
-            addGroupMember(groupMember.getName(), groupMember.getColor());
+            addGroupMember(groupMember.getName(), groupMember.getColor(), groupMember.getStudentId());
         }
     }
 
