@@ -13,12 +13,23 @@ import entities.Joke;
  */
 public class JokeDTO {
     
-    public String punchLine;
-    public String category;
+    private String punchLine;
+    private String category;
+    private Long id;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
     
     public JokeDTO (Joke joke){
         this.punchLine=joke.getPunchLine();
         this.category=joke.getCategory();
+        this.id=joke.getId();
     }
 
     public String getPunchLine() {

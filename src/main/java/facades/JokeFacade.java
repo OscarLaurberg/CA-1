@@ -61,8 +61,8 @@ public class JokeFacade {
         }
     }
 
-    public Joke addJoke(String punchLine, String category, int ageRestriction) {
-        Joke joke = new Joke(punchLine, category, ageRestriction);
+    public Joke addJoke(String punchLine, String category, String reference, int ageRestriction) {
+        Joke joke = new Joke(punchLine, category,reference, ageRestriction);
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
@@ -76,7 +76,7 @@ public class JokeFacade {
 
     public void addJokes(List<Joke> jokes) {
         for (Joke joke : jokes) {
-            addJoke(joke.getPunchLine(), joke.getCategory(), joke.getAgeRestriction());
+            addJoke(joke.getPunchLine(), joke.getCategory(), joke.getCategory(), joke.getAgeRestriction());
         }
     }
 

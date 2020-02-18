@@ -18,6 +18,7 @@ public class Joke implements Serializable {
     private String punchLine;
     private String category;
     private int ageRestriction;
+    private String reference;
 
     public Joke() {
     }
@@ -30,11 +31,20 @@ public class Joke implements Serializable {
         this.id = id;
     }
 
-    public Joke(String punchLine, String category, int ageRestriction ) {
+    public Joke(String punchLine, String category, String reference, int ageRestriction ) {
         this.punchLine = punchLine;
         this.ageRestriction = ageRestriction;
         this.category = category;
+        this.reference = reference;
 
+    }
+
+    public String getReference() {
+        return reference;
+    }
+
+    public void setReference(String reference) {
+        this.reference = reference;
     }
 
     public String getPunchLine() {

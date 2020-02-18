@@ -1,7 +1,9 @@
 package facades;
 
+import dto.JokeDTO;
 import utils.EMF_Creator;
 import entities.Joke;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import org.junit.jupiter.api.AfterAll;
@@ -43,8 +45,8 @@ public class JokeFacadeTest {
      */
     @BeforeAll
     public static void setUpClassV2() {
-       emf = EMF_Creator.createEntityManagerFactory(DbSelector.TEST,Strategy.DROP_AND_CREATE);
-       facade = JokeFacade.getFacadeExample(emf);
+        emf = EMF_Creator.createEntityManagerFactory(DbSelector.TEST, Strategy.DROP_AND_CREATE);
+        facade = JokeFacade.getFacadeExample(emf);
     }
 
     @AfterAll
@@ -60,10 +62,11 @@ public class JokeFacadeTest {
         try {
             em.getTransaction().begin();
             em.createNamedQuery("Joke.deleteAllRows").executeUpdate();
-            em.persist(new Joke("Joke1", "Adult", 18));
-            em.persist(new Joke("Joke2", "Dad Joke", 8));
-
             em.getTransaction().commit();
+
+            facade.addJoke("Joke1", "Adult","Unknown", 18);
+            facade.addJoke("Joke2", "Dad Joke","Unknown", 8);
+
         } finally {
             em.close();
         }
@@ -76,8 +79,26 @@ public class JokeFacadeTest {
 
     // TODO: Delete or change this method 
     @Test
-    public void testAFacadeMethod() {
+    public void testGetJokeCount() {
         assertEquals(2, facade.getJokeCount(), "Expects two rows in the database");
+    }
+
+    @Test
+    public void testGetJokeById() {
+        List<JokeDTO> allJokeDtos = facade.getAllJokes();
+        JokeDTO expectedJokeDTO = allJokeDtos.get(0);
+        Long id = expectedJokeDTO.getId();
+        Joke resultJoke = facade.getJokeById(id.intValue());
+        assertEquals(expectedJokeDTO.getPunchLine(),resultJoke.getPunchLine());
+    }
+    
+    @Test
+    public void testAddJoke() {
+        int expected = facade.getAllJokes().size()+1;
+        facade.addJoke("This is a test", "test", "Unknown",5);
+        int result = facade.getAllJokes().size();
+        assertEquals(expected,result);
+               
     }
 
 }
