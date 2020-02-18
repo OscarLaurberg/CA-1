@@ -113,6 +113,20 @@ public class JokesResourceTest {
                 .get("/jokes/all").then()
                 .assertThat()
                 .statusCode(HttpStatus.OK_200.getStatusCode())
-                .body("punchLine", hasItems("Joke1","Joke2"));
+                .body("punchLine", hasItems("Joke1", "Joke2"));
     }
-}
+
+    @Test
+    public void testGetJokeById() throws Exception {
+        int id = r1.getId().intValue();
+        given().
+                contentType("application/json")
+                .get("/jokes/{id}", id)
+                .then().assertThat()
+                .statusCode(200)
+                .body("punchLine", equalTo("Joke1"), "category", equalTo("Adult"), "reference", equalTo("Unknown"));
+             
+    }
+    
+    
+    }
