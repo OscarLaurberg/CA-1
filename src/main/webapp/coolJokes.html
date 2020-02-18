@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Our Cool Jokes</title>
+        <style>
+            table, th, td {
+                border: 1px solid black;
+            }
+            td{
+                padding: 3px;
+            }
+        </style>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <input type='number' id='jokeId' value=''/><button id='getJoke'>Get joke from ID</button><button id="getAllJokes">Get all jokes</button><button id="getRandomJoke">Get random joke</button>
+        <div id="tableDiv"></div>
+        <p id="jokeFromId"></p>
+    </body>
+    <script>
+        function getAllJokes() {
+            fetch("api/jokes/all")
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log("data", data);
+                        let tableString = "<table><tr><th>ID</th><th>The Joke</th><th>Category</th></tr>"
+                        let jokeTableArray = data.map(data => data = `<tr><td>${data.id}</td><td>${data.punchLine}</td><td>${data.category}</td></tr>`);
+                        jokeTableArray.forEach(data => {
+                            tableString += data;
+                        });
+                        tableString += "</table>";
+                        document.getElementById("tableDiv").innerHTML = tableString;
+                    });
+        }
+
+        function getJokeFromId() {
+            const jokeId = document.getElementById('jokeId').value;
+            (fetch("api/jokes/" + jokeId)
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log("data", data);
+                        let jokeString = `${data.punchLine}`
+                        document.getElementById('jokeFromId').innerHTML = jokeString;
+                    }));
+
+        }
+        
+        function getRandomJoke(){
+           fetch("api/jokes/random")
+                   .then(res => res.json())
+                   .then(data => {
+                       let randomJoke = `<table><tr><td>ID: ${data.id}</td><td> The joke: ${data.punchLine}</td><td>Category: ${data.category}</td></tr></table>`; 
+               document.getElementById('jokeFromId').innerHTML = randomJoke;
+           });
+        }
+
+        document.getElementById('getJoke').addEventListener('click', getJokeFromId);
+        document.getElementById('getAllJokes').addEventListener('click', getAllJokes);
+        document.getElementById('getRandomJoke').addEventListener('click', getRandomJoke);
+    </script>
+</html>
