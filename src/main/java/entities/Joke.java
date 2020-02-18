@@ -7,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 
-
 @Entity
 @NamedQuery(name = "Joke.deleteAllRows", query = "DELETE from Joke")
 public class Joke implements Serializable {
@@ -16,10 +15,13 @@ public class Joke implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+    private String punchLine;
+    private String category;
+    private int ageRestriction;
+
     public Joke() {
     }
-        
+
     public Long getId() {
         return id;
     }
@@ -27,35 +29,37 @@ public class Joke implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public Joke(String punchLine, String category, int ageRestriction ) {
+        this.punchLine = punchLine;
+        this.ageRestriction = ageRestriction;
+        this.category = category;
+
+    }
+
+    public String getPunchLine() {
+        return punchLine;
+    }
+
+    public void setPunchLine(String punchLine) {
+        this.punchLine = punchLine;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public int getAgeRestriction() {
+        return ageRestriction;
+    }
+
+    public void setAgeRestriction(int ageRestriction) {
+        this.ageRestriction = ageRestriction;
+    }
+
     
-    // TODO, delete this class, or rename to an Entity class that makes sense for what you are about to do
-    // Delete EVERYTHING below if you decide to use this class, it's dummy data used for the initial demo
-    private String dummyStr1;
-    private String dummyStr2;
-
-    public Joke(String dummyStr1, String dummyStr2) {
-        this.dummyStr1 = dummyStr1;
-        this.dummyStr2 = dummyStr2;
-    }
-
-    public String getDummyStr1() {
-        return dummyStr1;
-    }
-
-    public void setDummyStr1(String dummyStr1) {
-        this.dummyStr1 = dummyStr1;
-    }
-
-    public String getDummyStr2() {
-        return dummyStr2;
-    }
-
-    public void setDummyStr2(String dummyStr2) {
-        this.dummyStr2 = dummyStr2;
-    }
-    
-    
-    
-
-   
 }

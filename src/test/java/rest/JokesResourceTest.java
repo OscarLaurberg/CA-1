@@ -65,8 +65,8 @@ public class JokesResourceTest {
     @BeforeEach
     public void setUp() {
         EntityManager em = emf.createEntityManager();
-        r1 = new Joke("Some txt","More text");
-        r2 = new Joke("aaa","bbb");
+        r1 = new Joke("Joke1","Adult", 18);
+        r2 = new Joke("Joke2","Dad Joke", 8);
         try {
             em.getTransaction().begin();
             em.createNamedQuery("Joke.deleteAllRows").executeUpdate();
