@@ -7,25 +7,22 @@ and open the template in the editor.
 <html>
     <head>
         <title>Our Cool Jokes</title>
-        <style>
-            table, th, td {
-                border: 1px solid black;
-            }
-            td{
-                padding: 3px;
-            }
-        </style>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" crossorigin="anonymous">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <input type='number' id='jokeId' value=''/><button id='getJoke'>Get joke from ID</button><button id="getAllJokes">Get all jokes</button><button id="getRandomJoke">Get random joke</button>
-        <div id="tableDiv"></div>
-        <p id="jokeFromId"></p>
-            <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"  crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+        <div class="container">
+            <input type='number' id='jokeId' value=''/><button id='getJoke'>Get joke from ID</button><button id="getAllJokes">Get all jokes</button><button id="getRandomJoke">Get random joke</button>
+
+            <div id="tableDiv"></div>
+            <p id="jokeFromId"></p>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"  crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
         <script src='js/coolJokes.js'></script>
     </body>
-  
+
 </html>
