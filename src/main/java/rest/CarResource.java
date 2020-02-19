@@ -64,20 +64,20 @@ public class CarResource {
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllCars() {
+    public String getAllCars() {
         List<CarDTO> allCars = FACADE.getAllCars();
-        return Response.ok(allCars).build();
+        return GSON.toJson(allCars);
         //TODO return proper representation object
     }
 
     @POST
     @Path("add")
     @Consumes({MediaType.APPLICATION_JSON})
-    public Response addCars(String json) {
+    public String addCars(String json) {
         List<Car> cars = GSON.fromJson(json, new TypeToken<List<Car>>() {
         }.getType());
         List<CarDTO> carDTOs = FACADE.addCars(cars);
-        return Response.ok(carDTOs).build();
+        return GSON.toJson(carDTOs);
     }
 
     @GET
