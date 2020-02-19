@@ -127,4 +127,20 @@ public class CarFacadeTest {
         facade.addCar(car3);
         int result = facade.getAllCars().size();
     }
+    
+         @Test
+    public void testAddJokes(){
+        Car tc1 = new Car (200,"Test1","Test1",600, "Test1");
+        Car tc2 = new Car (400,"Test1","Test1",700,"Test1");
+        List<Car> cars = new ArrayList();
+        cars.add(tc1);
+        cars.add(tc2);
+        facade.addCars(cars);
+        int expected = 4;
+        int result = facade.getAllCars().size();
+        assertEquals(expected, result);
+              
+        
+        
+    }
 }
