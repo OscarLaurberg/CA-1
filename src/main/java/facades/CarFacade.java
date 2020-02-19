@@ -124,8 +124,10 @@ public class CarFacade {
     
     public List<CarDTO> addCars (List<Car> cars){
         List<CarDTO> carDTOs = new ArrayList();
-        cars.forEach(car -> addCar(car));
-        cars.forEach(car -> carDTOs.add(new CarDTO(car)));
+        for (Car car : cars){
+            addCar(car);
+            carDTOs.add(new CarDTO(car));
+        }
         return carDTOs;
     }
 }
