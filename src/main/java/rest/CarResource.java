@@ -65,7 +65,6 @@ public class CarResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllCars() {
-        
         List<CarDTO> allCars = FACADE.getAllCars();
         return Response.ok(allCars).build();
         //TODO return proper representation object
@@ -84,7 +83,7 @@ public class CarResource {
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    public String getCArFromId(@PathParam("id") int id) {
+    public String getCarFromId(@PathParam("id") int id) {
         List<CarDTO> car = FACADE.getCarsById(id);
         return GSON.toJson(car);
     }

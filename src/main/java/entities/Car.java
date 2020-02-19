@@ -31,7 +31,7 @@ public class Car implements Serializable {
     private int year;
     private String make;
     private String model;
-    public double price;
+    private double price;
     private String owner;
     @Temporal(TemporalType.DATE)
     private Date created = new Date();
