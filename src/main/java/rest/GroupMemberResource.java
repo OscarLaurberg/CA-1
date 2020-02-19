@@ -1,26 +1,35 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import dto.JokeDTO;
-import entities.Joke;
-import utils.EMF_Creator;
-import facades.JokeFacade;
+import entities.GroupMember;
+import facades.GroupMemberFacade;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.UriInfo;
+import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
+import utils.EMF_Creator;
 
-//Todo Remove or change relevant parts before ACTUAL use
-@Path("jokes")
-public class JokeResource {
+/**
+ * REST Web Service
+ *
+ * @author oscar
+ */
+@Path("groupmembers")
+public class GroupMemberResource {
 
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory(
                 "pu",
@@ -32,7 +41,7 @@ public class JokeResource {
     //An alternative way to get the EntityManagerFactory, whithout having to type the details all over the code
     //EMF = EMF_Creator.createEntityManagerFactory(DbSelector.DEV, Strategy.CREATE);
     
-    private static final JokeFacade FACADE =  JokeFacade.getFacadeExample(EMF);
+    private static final GroupMemberFacade FACADE =  GroupMemberFacade.getFacadeExample(EMF);
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
             
     @GET
@@ -43,42 +52,26 @@ public class JokeResource {
     @Path("count")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    public String getJokeCount() {
-        long count = FACADE.getJokeCount();
+    public String getGroupMemberCount() {
+        long count = FACADE.getGroupMemberCount();
         //System.out.println("--------------->"+count);
         return "{\"count\":"+count+"}";  //Done manually so no need for a DTO
-    }
-
-    @GET
-    @Path("{id}")
-    @Produces({MediaType.APPLICATION_JSON})
-    public String getJokeFromId(@PathParam("id") int id){
-        Joke joke = FACADE.getJokeById(id);
-        return GSON.toJson(joke);
     }
     
     @GET
     @Path("all")
     @Produces({MediaType.APPLICATION_JSON})
-    public String allJokeDTOs(){
-        List<JokeDTO> allJokeDTOs = FACADE.getAllJokes();
-        return GSON.toJson(allJokeDTOs);
-    }
-    
-    @GET
-    @Path("random")
-    @Produces({MediaType.APPLICATION_JSON})
-    public String randomJoke(){
-        JokeDTO joke = FACADE.getRandomJoke();
-        return GSON.toJson(joke);
+    public String allGroupMembers(){
+        List<GroupMember> allGroupMembers = FACADE.getAllGroupMembers();
+        return GSON.toJson(allGroupMembers);
     }
     
     @POST
     @Path("add")
     @Consumes({MediaType.APPLICATION_JSON})
-    public void addJokes(String json){
-        List <Joke> jokes = GSON.fromJson(json, new TypeToken<List<Joke>>(){}.getType());
-        FACADE.addJokes(jokes);
+    public void addGroupMembers(String json){
+        List <GroupMember> groupMembers = GSON.fromJson(json, new TypeToken<List<GroupMember>>(){}.getType());
+        FACADE.addGroupMembers(groupMembers);
     }
     
 }

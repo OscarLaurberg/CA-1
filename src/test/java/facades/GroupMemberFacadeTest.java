@@ -3,6 +3,7 @@ package facades;
 
 import utils.EMF_Creator;
 import entities.GroupMember;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -99,19 +100,29 @@ public class GroupMemberFacadeTest {
     }
     
     @Test
-    public void testGetAllJokes(){
+    public void testGetAllGroupMembers(){
         int expected = 4;
         int result = facade.getAllGroupMembers().size();
         assertEquals(expected,result);
     }
     
-    // contains bruger .equals metoden, så nedenstående virker ikke.
-    // Går lige i tænkeboks mht. hvordan jeg tester getRandomJoke og arbejder videre med noget andet imens.
-//    @Test
-//    public void testGetRandomJoke(){
-//        JokeDTO randomJokeDTO = facade.getRandomJoke();
-//        List<JokeDTO> allJokes = facade.getAllJokes();
-//        assertTrue(allJokes.contains(randomJokeDTO));
-//    }
+    
+    //Måske jeg også mangler denne test i JokeFacadeTest
+    @Test
+    public void testAddGroupMembers(){
+        GroupMember gm1 = new GroupMember ("Test1","Test1","Test1");
+        GroupMember gm2 = new GroupMember ("Test2","Test2","Test2");
+        List<GroupMember> groupMembers = new ArrayList();
+        groupMembers.add(gm1);
+        groupMembers.add(gm2);
+        facade.addGroupMembers(groupMembers);
+        int expected = 6;
+        int result = facade.getAllGroupMembers().size();
+        assertEquals(expected, result);
+              
+        
+        
+    }
+    
 
 }

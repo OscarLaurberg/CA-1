@@ -3,6 +3,7 @@ package facades;
 import dto.JokeDTO;
 import utils.EMF_Creator;
 import entities.Joke;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -108,6 +109,22 @@ public class JokeFacadeTest {
         int expected = 2;
         int result = facade.getAllJokes().size();
         assertEquals(expected,result);
+    }
+    
+        @Test
+    public void testAddJokes(){
+        Joke jk1 = new Joke ("Test1","Test1","Test1",2);
+        Joke jk2 = new Joke ("Test1","Test1","Test1",2);
+        List<Joke> jokes = new ArrayList();
+        jokes.add(jk1);
+        jokes.add(jk2);
+        facade.addJokes(jokes);
+        int expected = 4;
+        int result = facade.getAllJokes().size();
+        assertEquals(expected, result);
+              
+        
+        
     }
     
     // contains bruger .equals metoden, så nedenstående virker ikke.
