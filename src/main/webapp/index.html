@@ -3,6 +3,14 @@
     <head>
         <title>Start Page</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <style>
+            table, th, td {
+                border: 1px solid black;
+            }
+            td{
+                padding: 3px;
+            }
+        </style>
     </head>
     <body>
         <h1>Minor change for first deploy.</h1>
@@ -10,5 +18,37 @@
         <h3 align="center">Vinteroptag 2019</h3>
         <br>
         <h4 align="center">Members (Loaded from a REST API)</h4>
+        <div align="center" id="groupMemberTable">
+        </div>
+        <br>
+        <div align="center">    <button id="reloadNames">Reload names</button></div>
+
+
     </body>
+
+    <script>
+        function getAllGroupMembers() {
+            fetch("api/groupmembers/all")
+                    .then(res => res.json())
+                    .then(data => {
+                        let tableString = "<table> <tr> <th>Name</th><th>Student Id</th><th>Color</th></tr>";
+                        let groupMemberTableArray = data.map(data => data = `<tr><td>${data.name} </td><td>${data.studentId} </td><td>${data.color}</td></tr>`);
+                        groupMemberTableArray.forEach(data => {
+                            tableString += data;
+                        });
+                        tableString += "</table>";
+                        document.getElementById("groupMemberTable").innerHTML = tableString;
+                        console.log("Page reloaded");
+                    });
+
+        }
+
+
+
+        document.getElementById('reloadNames').addEventListener('click', getAllGroupMembers);
+        document.addEventListener('DOMContentLoaded', getAllGroupMembers);
+
+
+    </script>
+
 </html>
