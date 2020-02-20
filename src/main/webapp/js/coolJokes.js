@@ -1,42 +1,53 @@
- function getAllJokes() {
-            fetch("api/jokes/all")
-                    .then(res => res.json())
-                    .then(data => {
-                        console.log("data", data);
-                        let tableString = "<table><tr><th>ID</th><th>The Joke</th><th>Category</th></tr>"
-                        let jokeTableArray = data.map(data => data = `<tr><td>${data.id}</td><td>${data.punchLine}</td><td>${data.category}</td></tr>`);
-                        jokeTableArray.forEach(data => {
-                            tableString += data;
-                        });
-                        tableString += "</table>";
-                        document.getElementById("tableDiv").innerHTML = tableString;
-                    });
-        }
+const state = {
+    jokes: []
+};
 
-        function getJokeFromId() {
-            if (document.getElementById('jokeId').value === 0) {
-                document.getElementById('jokeFromId').innerHTML = "Please enter a valid Id.";
-            }else{
-            const jokeId = document.getElementById('jokeId').value;
-            (fetch("api/jokes/" + jokeId)
-                    .then(res => res.json())
-                    .then(data => {
-                        console.log("data", data);
-                        let jokeString = `${data.punchLine}`
-                        document.getElementById('jokeFromId').innerHTML = jokeString;
-                    }));
+document.addEventListener('DOMContentLoaded', (event) => {
+    fetch("api/jokes/all")
+            .then(res => res.json())
+            .then(data => state.jokes = data)
+});
 
-        }}
+function getAllJokes() {
+    fetch("api/jokes/all")
+            .then(res => res.json())
+            .then(data => populateTable(data));
+}
+;
+function getJokeFromId() {
+    let amountOfJokes = state.jokes.length;
+    console.log(amountOfJokes);
+    const jokeId = document.getElementById('jokeId').value;
+    if (jokeId > amountOfJokes || jokeId < 1) {
+        document.getElementById('tableBody').innerHTML = "Joke Id doesn't exist - try again";
+
+    }else{
         
-        function getRandomJoke(){
-           fetch("api/jokes/random")
-                   .then(res => res.json())
-                   .then(data => {
-                       let randomJoke = `<table><tr><td>ID: ${data.id}</td><td> The joke: ${data.punchLine}</td><td>Category: ${data.category}</td></tr></table>`; 
-               document.getElementById('jokeFromId').innerHTML = randomJoke;
-           });
-        }
+    
+    (fetch("api/jokes/" + jokeId))
+            .then(res => res.json())
+            .then(data => {
+                let jokeFromId = `<tr><td>${data.id}</td><td>${data.punchLine}</td><td>${data.category}</td></tr>`;
+                document.getElementById('tableBody').innerHTML = jokeFromId;
 
-        document.getElementById('getJoke').addEventListener('click', getJokeFromId);
-        document.getElementById('getAllJokes').addEventListener('click', getAllJokes);
-        document.getElementById('getRandomJoke').addEventListener('click', getRandomJoke);
+            })
+}}
+;
+
+function getRandomJoke() {
+    fetch("api/jokes/random")
+            .then(res => res.json())
+            .then(data => {
+                let randomJoke = `<table><tr><td> ${data.id}</td><td>${data.punchLine}</td><td>${data.category}</td></tr>`;
+                document.getElementById('tableBody').innerHTML = randomJoke;
+            });
+}
+
+const populateTable = data => {
+    const dataArray = data.map(data => `<tr><td>${data.id}</td><td>${data.punchLine}</td><td>${data.category}</td></tr>`);
+    document.getElementById('tableBody').innerHTML = dataArray.join('');
+}
+
+document.getElementById('getJoke').addEventListener('click', getJokeFromId);
+document.getElementById('getAllJokes').addEventListener('click', getAllJokes);
+document.getElementById('getRandomJoke').addEventListener('click', getRandomJoke);

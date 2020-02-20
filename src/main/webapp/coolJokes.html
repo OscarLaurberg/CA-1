@@ -43,9 +43,23 @@ and open the template in the editor.
             <br>
             <br>
             <div class="container">
-                <input type='number' id='jokeId' value=''/><button id='getJoke'>Get joke from ID</button><button id="getAllJokes">Get all jokes</button><button id="getRandomJoke">Get random joke</button>
-
-                <div id="tableDiv"></div>
+                <input type='number' id='jokeId' value=''/><button id='getJoke' type="button" class="btn btn-outline-primary">Get joke from ID</button><button id='getAllJokes' type="button" class="btn btn-outline-primary">Get all jokes</button><button id='getRandomJoke' type="button" class="btn btn-outline-primary">Get random joke</button>
+                <br>
+                <br>
+                <div class="container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">The Joke</th>
+                                <th scope="col">Category</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody"></tbody>
+                    </table>
+                    <br>
+                    <br>
+                </div>
                 <p id="jokeFromId"></p>
             </div>
         </div>
