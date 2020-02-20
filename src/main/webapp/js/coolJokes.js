@@ -31,6 +31,7 @@ function getJokeFromId() {
                     document.getElementById('tableBody').innerHTML = jokeFromId;
 
                 })
+                document.getElementById('jokeId').value = '';
     }
 }
 ;

@@ -43,14 +43,18 @@ and open the template in the editor.
         <h1 class="header" align='center'>Cars assignment</h1>
 
         <div class="container">
+
             <form class="form-inline" onSubmit="handleFilterTable(event)">
                 <div class="form-group mb-2">
-                    <input type="text" class="form-control" id="inputMake" placeholder="Make...">
-                    <input type="text" class="form-control" id="inputModel" placeholder="Model...">   
-                    <input type="number" class="form-control" id="inputYear" placeholder="Minimum year...">
-                    <input type="number" class="form-control" id="inputPrice" placeholder="Max price...">
-                    <button type="submit" class="btn btn-primary mb-2">Filter</button>
+                    <div class="container text-center">
+                        <input type="text" class="form-control" id="inputMake" placeholder="Make...">
+                        <input type="text" class="form-control" id="inputModel" placeholder="Model...">   
+                        <input type="number" class="form-control" id="inputYear" placeholder="Minimum year...">
+                        <input type="number" class="form-control" id="inputPrice" placeholder="Max price...">
+                        <button type="submit" class="btn btn-primary mb-2">Filter</button>
+                    </div>
             </form>
+
 
         </div>
         <table class="table">
