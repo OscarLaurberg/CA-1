@@ -14,6 +14,9 @@
         }
 
         function getJokeFromId() {
+            if (document.getElementById('jokeId').value === 0) {
+                document.getElementById('jokeFromId').innerHTML = "Please enter a valid Id.";
+            }else{
             const jokeId = document.getElementById('jokeId').value;
             (fetch("api/jokes/" + jokeId)
                     .then(res => res.json())
@@ -23,7 +26,7 @@
                         document.getElementById('jokeFromId').innerHTML = jokeString;
                     }));
 
-        }
+        }}
         
         function getRandomJoke(){
            fetch("api/jokes/random")

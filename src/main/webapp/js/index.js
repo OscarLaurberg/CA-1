@@ -24,9 +24,22 @@ function getAllGroupMembers() {
 ;
 
 const populateTable = data => {
-    const dataArray = data.map(data => `<tr><td>${data.name}</td><td>${data.studentId}</td><td>${data.color}</td></tr>`);
+    const dataArray = data.map(data => `<tr><td>${data.name}</td><td>${data.studentId}</td><td>${handleColor(data.color)}</td></tr>`);
     document.getElementById('tableBody').innerHTML = dataArray.join('');
 };
+
+const handleColor = dataColor => {
+    switch(dataColor){
+        case 'Red':
+            return '<span class="badge badge-danger">Red</span>';
+        case 'Yellow':
+            return '<span class="badge badge-warning">Yellow</span>';
+        default:
+            return '<span class="badge badge-success">Green</span>';
+            
+    }
+};
+
 
 
 document.getElementById('reloadNames').addEventListener('click', getAllGroupMembers);

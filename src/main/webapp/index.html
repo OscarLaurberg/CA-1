@@ -4,36 +4,62 @@
         <title>CA-1</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" crossorigin="anonymous">
-
     </head>
     <body>
-        <br>
-        <h2 align="center">Team Guld (Gruppe 2)</h2> 
-        <h3 align="center">Vinteroptag 2019</h3>
-        <br>
-        <h4 align="center">Members (Loaded from a REST API)</h4>
         <div class="container">
+            <ul class="nav nav-tabs  bg-light">
+                <li class="nav-item">
+                    <a class="nav-link active" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://github.com/OscarLaurberg/CA-1" target="_blank">My GitHub Repo</a>
+                </li>
 
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Name</th>
-                        <th scope="col">Student Id</th>
-                        <th scope="col">Color</th>
-                    </tr>
-                </thead>
-                <tbody id="tableBody"></tbody>
-            </table>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://travis-ci.org/OscarLaurberg/CA-1" target="_blank">Travis</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Assignments</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="coolJokes.html">Jokes</a>
+                        <a class="dropdown-item" href="cars.html">Cars</a>
+                        <a class="dropdown-item" href="feedback.html">Feedback</a>
+                        <a class="dropdown-item" href="#">Group contract</a>
+
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="solutions.html">Who did what</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="container">
             <br>
-            <div align="center"> <button type="button" id="reloadNames" class="btn btn-dark">Reload names</button>  
+            <div class="text-center">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/1/14/MOH-logo.png" class="rounded" alt="MoH">
             </div>
             <br>
-            <div class="container"  align="center">
-                <a href="groupContract.html" class="btn btn-info" role="button">Who did what and our Group Contract</a>
-                <a href="coolJokes.html" class="btn btn-info" role="button">Our cool jokes!</a>
-                <a href="https://github.com/OscarLaurberg/CA-1" target="_blank" class="btn btn-info" role="button">My GitHub Repo</a>
-                <a href="feedback.html" class="btn btn-info" role="button">My feedback on Flow-1</a>
-                <a href="cars.html" class="btn btn-info" role="button">Cars for sale!</a></div>
+            <h2 align="center">Team <font color="#DAA520">Guld</font> (Gruppe 2)</h2> 
+            <h3 align="center">Vinteroptag 2019</h3>
+            <br>
+            <h4 align="center">Members (Loaded from a REST API)</h4>
+            <br>
+
+            <div class="container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Student Id</th>
+                            <th scope="col">Color</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody"></tbody>
+                </table>
+                <br>
+                <div align="center"> <button type="button" id="reloadNames" class="btn btn-dark">Reload names</button>  
+                </div>
+                <br>
+            </div>
         </div>
 
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"  crossorigin="anonymous"></script>
