@@ -51,7 +51,7 @@ function getRandomChuckNorrisJoke() {
     fetch("https://api.chucknorris.io/jokes/random")
             .then(res => res.json())
             .then(data => {
-                let randomCNJoke = `<tr><td> ${data.id}</td><td>${data.value}</td><td>No category</td></tr>`;
+                let randomCNJoke = `<tr><td> ${data.id}</td><td>${data.value}</td><td>Chuck Norris</td></tr>`;
         document.getElementById('tableBody').innerHTML = randomCNJoke;
     }
             );
