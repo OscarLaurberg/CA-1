@@ -13,6 +13,21 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 });
 
+const clearFilter = e => {
+    e.preventDefault();
+    document.getElementById('inputMake').value = "";
+    document.getElementById('inputModel').value = "";
+    document.getElementById('inputYear').value = "";
+    document.getElementById('inputPrice').value = "";
+    
+    fetch("/CA-1/api/cars")
+            .then(res => res.json())
+            .then(data => state.cars = data)
+            .then(data => state.filteredCars = data)
+            .then(data => populateTable(data));
+
+}
+
 const populateTable = data => {
     const dataArray = data.map(data => `<tr><td>${data.id}</td><td>${data.make}</td><td>${data.model}</td><td>${data.year}</td><td>${data.price}</td></tr>`);
     document.getElementById('tableBody').innerHTML = dataArray.join('');
@@ -58,3 +73,6 @@ const sort = e => {
     }
     populateTable(cars);
 };
+
+
+document.getElementById('resetFilters').addEventListener('click', clearFilter);
